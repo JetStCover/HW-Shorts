@@ -135,4 +135,46 @@ class AviaSoulsTest {
         int expected = 0;
         Assertions.assertEquals(expected, actual);
     }
+    @Test
+    public void findOneTicket() {
+
+        Ticket ticket1 = new Ticket("MSK", "USA", 1_000, 7, 15);
+        Ticket ticket2 = new Ticket("MSK", "USA", 4_000, 9, 12);
+        Ticket ticket3 = new Ticket("SPB", "NY", 9_000, 3, 9);
+        Ticket ticket4 = new Ticket("NY", "MSK", 900, 16, 20);
+        Ticket ticket5 = new Ticket("MSK", "USA", 700, 5, 13);
+
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+        manager.add(ticket5);
+
+        Ticket[] actual = manager.search("NY", "MSK");
+        Ticket[] expected = {ticket4};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void notFoundTicket() {
+
+        Ticket ticket1 = new Ticket("MSK", "USA", 1_000, 7, 15);
+        Ticket ticket2 = new Ticket("MSK", "USA", 4_000, 9, 12);
+        Ticket ticket3 = new Ticket("SPB", "NY", 9_000, 3, 9);
+        Ticket ticket4 = new Ticket("NY", "MSK", 900, 16, 20);
+        Ticket ticket5 = new Ticket("MSK", "USA", 700, 5, 13);
+
+        AviaSouls manager = new AviaSouls();
+        manager.add(ticket1);
+        manager.add(ticket2);
+        manager.add(ticket3);
+        manager.add(ticket4);
+        manager.add(ticket5);
+
+        Ticket[] actual = manager.search("VOL", "JAP");
+        Ticket[] expected = {};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
